@@ -1,0 +1,473 @@
+/*
+ * Zenvia Water - CSS Animations
+ * Water-flow inspired keyframe animations
+ */
+
+/* ========================================
+   WATER RIPPLE EFFECT
+   ======================================== */
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.ripple-effect::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(0, 188, 212, 0.3);
+    transform: translate(-50%, -50%);
+    animation: ripple 2s ease-out infinite;
+}
+
+/* ========================================
+   WATER WAVE ANIMATION
+   ======================================== */
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.water-wave-anim {
+    animation: wave 3s ease-in-out infinite;
+}
+
+@keyframes waveHorizontal {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+}
+
+.water-flow {
+    animation: waveHorizontal 4s ease-in-out infinite;
+}
+
+/* ========================================
+   DROP ANIMATION
+   ======================================== */
+
+@keyframes waterDrop {
+    0% {
+        transform: translateY(-20px) scale(1);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) scale(1.1);
+        opacity: 0;
+    }
+}
+
+.water-drop {
+    animation: waterDrop 2s ease-in-out infinite;
+}
+
+/* ========================================
+   FADE ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-left {
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-right {
+    animation: fadeInRight 0.8s ease-out;
+}
+
+/* ========================================
+   SCALE ANIMATIONS
+   ======================================== */
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.scale-in {
+    animation: scaleIn 0.6s ease-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   FLOAT ANIMATION
+   ======================================== */
+
+@keyframes floatSlow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.float-slow {
+    animation: floatSlow 4s ease-in-out infinite;
+}
+
+@keyframes floatFast {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.float-fast {
+    animation: floatFast 2s ease-in-out infinite;
+}
+
+/* ========================================
+   SHIMMER EFFECT
+   ======================================== */
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(
+        to right,
+        #E0F7FF 0%,
+        #FFFFFF 50%,
+        #E0F7FF 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s linear infinite;
+}
+
+/* ========================================
+   LOADING ANIMATIONS
+   ======================================== */
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.bounce {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+/* ========================================
+   BACKGROUND WAVE EFFECT
+   ======================================== */
+
+.wave-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.wave-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0, 188, 212, 0.1),
+        transparent
+    );
+    animation: waveSlide 3s ease-in-out infinite;
+}
+
+@keyframes waveSlide {
+    0% {
+        transform: translateX(-50%);
+    }
+    50% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ========================================
+   TEXT ANIMATIONS
+   ======================================== */
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid;
+    animation: typewriter 3s steps(40) 1s forwards;
+}
+
+@keyframes textReveal {
+    0% {
+        clip-path: inset(0 100% 0 0);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+.text-reveal {
+    animation: textReveal 1.2s ease-out;
+}
+
+/* ========================================
+   STAGGER DELAYS
+   ======================================== */
+
+.stagger-1 {
+    animation-delay: 0.1s;
+}
+
+.stagger-2 {
+    animation-delay: 0.2s;
+}
+
+.stagger-3 {
+    animation-delay: 0.3s;
+}
+
+.stagger-4 {
+    animation-delay: 0.4s;
+}
+
+.stagger-5 {
+    animation-delay: 0.5s;
+}
+
+/* ========================================
+   HOVER EFFECTS
+   ======================================== */
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hover-grow {
+    transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+    transform: scale(1.05);
+}
+
+.hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+}
+
+/* ========================================
+   SCROLL ANIMATIONS (for fallback)
+   ======================================== */
+
+.scroll-fade {
+    opacity: 1; /* Changed from 0 to 1 to prevent invisibility if JS fails */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .js-loaded .scroll-fade {
+        opacity: 0; /* Only hide initially if JS is confirmed loaded */
+    }
+}
+
+.scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-slide-left {
+    opacity: 1; /* Changed from 0 to 1 */
+    transform: translateX(0); /* Reset transform */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .js-loaded .scroll-slide-left {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+}
+
+.scroll-slide-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-slide-right {
+    opacity: 1; /* Changed from 0 to 1 */
+    transform: translateX(0); /* Reset transform */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .js-loaded .scroll-slide-right {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+}
+
+.scroll-slide-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ========================================
+   RESPONSIVE ANIMATION CONTROL
+   ======================================== */
+
+/* Disable complex animations on mobile for performance */
+@media (max-width: 768px) {
+    .ripple-effect::before,
+    .water-wave-anim,
+    .water-flow,
+    .water-drop,
+    .shimmer,
+    .float-slow,
+    .float-fast {
+        animation: none;
+    }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

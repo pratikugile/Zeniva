@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <!-- Water droplet icon -->
+  <g>
+    <path d="M 30 15 Q 30 10, 30 10 Q 35 15, 35 25 Q 35 35, 30 35 Q 25 35, 25 25 Q 25 15, 30 10" fill="#0891B2" opacity="0.9"/>
+    <path d="M 28 20 Q 28 22, 30 22 Q 32 22, 32 20 Q 32 18, 30 15 Q 28 18, 28 20" fill="#ECFEFF" opacity="0.7"/>
+  </g>
+
+  <!-- Zenvia text -->
+  <text x="50" y="35" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700" fill="#111827">
+    Zenvia
+  </text>
+
+  <!-- Tagline -->
+  <text x="50" y="48" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#4B5563" letter-spacing="1">
+    PURE WATER, PURE LIFE
+  </text>
+</svg>

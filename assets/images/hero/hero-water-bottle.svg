@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 360" width="240" height="360">
+  <defs>
+    <linearGradient id="pouch1l" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0f7fa"/>
+      <stop offset="50%" stop-color="#b2ebf2"/>
+      <stop offset="100%" stop-color="#80deea"/>
+    </linearGradient>
+    <linearGradient id="water1l" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4dd0e1" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00acc1" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="cap1l" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00bcd4"/>
+      <stop offset="100%" stop-color="#00838f"/>
+    </linearGradient>
+    <filter id="shadow1l">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Pouch body -->
+  <path d="M70 60 Q65 60 60 80 L50 280 Q48 310 80 320 L160 320 Q192 310 190 280 L180 80 Q175 60 170 60 Z" fill="url(#pouch1l)" stroke="#b2ebf2" stroke-width="1" filter="url(#shadow1l)"/>
+
+  <!-- Water fill -->
+  <path d="M54 200 Q80 195 120 200 Q160 205 186 200 L190 280 Q192 310 160 320 L80 320 Q48 310 50 280 Z" fill="url(#water1l)" opacity="0.6"/>
+
+  <!-- Spout / Cap area -->
+  <rect x="100" y="30" width="40" height="30" rx="4" fill="url(#cap1l)"/>
+  <rect x="105" y="22" width="30" height="12" rx="6" fill="#00838f"/>
+
+  <!-- Crinkle lines at top -->
+  <path d="M70 60 Q90 55 120 60 Q150 65 170 60" fill="none" stroke="#80cbc4" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Side seals -->
+  <line x1="55" y1="90" x2="52" y2="270" stroke="#80cbc4" stroke-width="1" opacity="0.3"/>
+  <line x1="185" y1="90" x2="188" y2="270" stroke="#80cbc4" stroke-width="1" opacity="0.3"/>
+
+  <!-- Label background -->
+  <rect x="72" y="110" width="96" height="130" rx="8" fill="white" opacity="0.92"/>
+  <rect x="72" y="110" width="96" height="130" rx="8" fill="none" stroke="#00bcd4" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Brand name -->
+  <text x="120" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#00838f">ZENVIA</text>
+
+  <!-- Water drops icon -->
+  <circle cx="108" cy="160" r="4" fill="#4dd0e1" opacity="0.7"/>
+  <circle cx="120" cy="155" r="5" fill="#26c6da" opacity="0.8"/>
+  <circle cx="132" cy="160" r="4" fill="#4dd0e1" opacity="0.7"/>
+
+  <!-- Product description -->
+  <text x="120" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#546e7a">PACKAGED DRINKING</text>
+  <text x="120" y="197" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#546e7a">WATER</text>
+
+  <!-- Volume -->
+  <text x="120" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#00acc1">1 Litre</text>
+
+  <!-- Bottom notch / tear point -->
+  <circle cx="120" cy="335" r="5" fill="none" stroke="#b2ebf2" stroke-width="1" stroke-dasharray="2 2"/>
+
+  <!-- Shine highlight -->
+  <ellipse cx="92" cy="180" rx="8" ry="50" fill="white" opacity="0.15" transform="rotate(-5 92 180)"/>
+</svg>

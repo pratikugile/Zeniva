@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Zenvia Water</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg">
+
+    <!-- Mobile: Theme color -->
+    <meta name="theme-color" content="#0891B2">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/tailwind-custom.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'zenvia-blue': '#0891B2',
+                        'zenvia-light': '#ECFEFF',
+                        'zenvia-lighter': '#A5F3FC'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased bg-gradient-to-b from-zenvia-light to-white min-h-screen flex flex-col">
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center px-4">
+        <div class="text-center max-w-lg mx-auto">
+            <!-- 404 Icon -->
+            <div class="mb-8">
+                <svg class="w-24 h-24 mx-auto text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                </svg>
+            </div>
+
+            <h1 class="text-6xl font-bold text-cyan-600 mb-4">404</h1>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Page Not Found</h2>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+                The page you are looking for might have been moved or no longer exists. Let us help you find what you need.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html" class="btn-primary inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Go Home
+                </a>
+                <a href="contact.html" class="border-2 border-cyan-500 text-cyan-700 hover:bg-cyan-500 hover:text-white px-8 py-3 rounded-lg font-bold transition duration-300 inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Contact Us
+                </a>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="mt-12 text-sm text-gray-500">
+                <p class="mb-3">Or try one of these pages:</p>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <a href="products.html" class="text-cyan-600 hover:underline">Products</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="quality.html" class="text-cyan-600 hover:underline">Quality</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="service-area.html" class="text-cyan-600 hover:underline">Service Area</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="about.html" class="text-cyan-600 hover:underline">About</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-sm text-gray-500">
+        <p>&copy; 2026 Zenvia Water. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
