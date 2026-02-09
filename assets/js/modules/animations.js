@@ -12,39 +12,50 @@
     }
 
     /**
-     * Hero section — gentle reveal, like water settling
+     * Hero section — staggered reveal with water-settling ease
+     * Targets actual classes present in the HTML
      */
     function initHeroAnimations() {
         if (!isGSAPLoaded()) return;
 
-        var tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+        var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
+        var heroBadge = document.querySelector('.hero-badge');
         var heroHeading = document.querySelector('.hero-heading');
-        var heroSubheading = document.querySelector('.hero-subheading');
-        var heroBottle = document.querySelector('.hero-bottle-img');
-        var heroCTAs = document.querySelectorAll('.hero-cta');
+        var heroSubtitle = document.querySelector('.hero-subtitle');
+        var heroCTAGroup = document.querySelector('.hero-cta-group');
+        var heroTrustStrip = document.querySelector('.hero-trust-strip');
+        var heroStatsBlock = document.querySelector('.hero-stats-block');
 
+        // Badge drops in first
+        if (heroBadge) {
+            tl.from(heroBadge, { y: -20, opacity: 0, duration: 0.7 }, 0.1);
+        }
+        // Heading slides up
         if (heroHeading) {
-            tl.from(heroHeading, { y: 30, duration: 1 }, 0.2);
+            tl.from(heroHeading, { y: 40, opacity: 0, duration: 1 }, 0.25);
         }
-        if (heroSubheading) {
-            tl.from(heroSubheading, { y: 20, duration: 1 }, 0.5);
+        // Subtitle fades in
+        if (heroSubtitle) {
+            tl.from(heroSubtitle, { y: 25, opacity: 0, duration: 0.9 }, 0.5);
         }
-        if (heroCTAs.length > 0) {
-            tl.from(heroCTAs, { y: 15, duration: 0.8, stagger: 0.15 }, 0.8);
+        // CTA buttons stagger in
+        if (heroCTAGroup) {
+            var ctaButtons = heroCTAGroup.querySelectorAll('a');
+            if (ctaButtons.length > 0) {
+                tl.from(ctaButtons, { y: 20, opacity: 0, duration: 0.7, stagger: 0.15 }, 0.75);
+            }
         }
-        if (heroBottle) {
-            tl.from(heroBottle, { y: 40, duration: 1.4, ease: 'sine.out' }, 0.3);
-
-            // Slow, gentle float — like a bottle on still water
-            gsap.to(heroBottle, {
-                y: -8,
-                duration: 4,
-                ease: 'sine.inOut',
-                repeat: -1,
-                yoyo: true,
-                delay: 1.8
-            });
+        // Trust strip fades in
+        if (heroTrustStrip) {
+            tl.from(heroTrustStrip, { y: 15, opacity: 0, duration: 0.6 }, 1);
+        }
+        // Desktop stats cards stagger in from right
+        if (heroStatsBlock) {
+            var statCards = heroStatsBlock.querySelectorAll('.glass-effect-dark');
+            if (statCards.length > 0) {
+                tl.from(statCards, { x: 40, opacity: 0, duration: 0.8, stagger: 0.18 }, 0.4);
+            }
         }
     }
 
@@ -58,6 +69,7 @@
             gsap.from(heading, {
                 scrollTrigger: { trigger: heading, start: 'top 88%' },
                 y: 20,
+                opacity: 0,
                 duration: 0.9,
                 ease: 'power2.out'
             });
@@ -71,19 +83,20 @@
         if (!isGSAPLoaded() || typeof ScrollTrigger === 'undefined') return;
 
         var featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach(function(card, index) {
-            gsap.from(card, {
+        if (featureCards.length > 0) {
+            gsap.from(featureCards, {
                 scrollTrigger: {
-                    trigger: card,
+                    trigger: featureCards[0],
                     start: 'top 85%',
                     toggleActions: 'play none none none'
                 },
-                y: 30,
+                y: 40,
+                opacity: 0,
                 duration: 0.8,
                 ease: 'power2.out',
-                delay: index * 0.12
+                stagger: 0.15
             });
-        });
+        }
     }
 
     /**
@@ -96,7 +109,8 @@
         if (productItems.length > 0) {
             gsap.from(productItems, {
                 scrollTrigger: { trigger: productItems[0], start: 'top 80%' },
-                y: 40,
+                y: 50,
+                opacity: 0,
                 stagger: 0.2,
                 duration: 0.9,
                 ease: 'power2.out'
@@ -105,25 +119,70 @@
     }
 
     /**
-     * Stats counter — smooth count-up
+     * Stats counter — smooth count-up with suffix support ("+", "/7", etc.)
      */
     function initStatsAnimation() {
         if (!isGSAPLoaded() || typeof ScrollTrigger === 'undefined') return;
 
         document.querySelectorAll('.stat-number').forEach(function(stat) {
             var finalValue = parseInt(stat.textContent || '0');
+            var suffix = stat.getAttribute('data-suffix') || '';
             var obj = { val: 0 };
 
             gsap.to(obj, {
-                scrollTrigger: { trigger: stat, start: 'top 80%' },
+                scrollTrigger: { trigger: stat, start: 'top 85%' },
                 val: finalValue,
-                duration: 2,
+                duration: 2.2,
                 ease: 'power1.out',
                 onUpdate: function() {
-                    stat.textContent = Math.ceil(obj.val);
+                    var displayVal = Math.ceil(obj.val);
+                    // Format numbers > 999 with commas
+                    if (displayVal >= 1000) {
+                        stat.textContent = displayVal.toLocaleString('en-IN') + suffix;
+                    } else {
+                        stat.textContent = displayVal + suffix;
+                    }
                 }
             });
         });
+    }
+
+    /**
+     * Stat cards — stagger in on scroll
+     */
+    function initStatCardAnimations() {
+        if (!isGSAPLoaded() || typeof ScrollTrigger === 'undefined') return;
+
+        var statCards = document.querySelectorAll('.stat-card');
+        if (statCards.length > 0) {
+            gsap.from(statCards, {
+                scrollTrigger: { trigger: statCards[0], start: 'top 85%' },
+                y: 30,
+                opacity: 0,
+                stagger: 0.12,
+                duration: 0.7,
+                ease: 'power2.out'
+            });
+        }
+    }
+
+    /**
+     * Certification badges — subtle scale-in on scroll
+     */
+    function initCertBadgeAnimations() {
+        if (!isGSAPLoaded() || typeof ScrollTrigger === 'undefined') return;
+
+        var badges = document.querySelectorAll('.py-12 .flex-col.items-center');
+        if (badges.length > 0) {
+            gsap.from(badges, {
+                scrollTrigger: { trigger: badges[0], start: 'top 85%' },
+                scale: 0.8,
+                opacity: 0,
+                stagger: 0.1,
+                duration: 0.6,
+                ease: 'back.out(1.4)'
+            });
+        }
     }
 
     /**
@@ -157,7 +216,29 @@
                     toggleActions: 'play none none none'
                 },
                 y: 25,
+                opacity: 0,
                 duration: 0.8,
+                ease: 'power2.out'
+            });
+        });
+    }
+
+    /**
+     * Parallax for section backgrounds — gentle depth
+     */
+    function initParallaxEffects() {
+        if (!isGSAPLoaded() || typeof ScrollTrigger === 'undefined') return;
+
+        document.querySelectorAll('.glass-effect.rounded-2xl').forEach(function(el) {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
                 ease: 'power2.out'
             });
         });
@@ -183,8 +264,11 @@
         initFeatureAnimations();
         initProductAnimations();
         initStatsAnimation();
+        initStatCardAnimations();
+        initCertBadgeAnimations();
         initWaterWaveEffects();
         initScrollAnimations();
+        initParallaxEffects();
     }
 
     var gsapRetries = 0;

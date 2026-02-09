@@ -1,0 +1,422 @@
+/*
+ * Zenvia Water - Water Bottle Scroll Animation
+ * Inspired by ReactBits scroll-reveal, counter, and split-text animations
+ * A scroll-driven water bottle that pours droplets revealing water quality values
+ */
+
+/* ========================================
+   WATER QUALITY SECTION LAYOUT
+   ======================================== */
+
+.water-quality-section {
+    position: relative;
+    background: linear-gradient(180deg, #f0fdfa 0%, #e0f7fa 30%, #b2ebf2 70%, #e0f7fa 100%);
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.water-quality-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, white, transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.water-quality-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, white, transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ========================================
+   SCROLL-PINNED CONTAINER
+   ======================================== */
+
+.wq-pin-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wq-content-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ========================================
+   SECTION HEADING - SCROLL REVEAL TEXT
+   ======================================== */
+
+.wq-heading-area {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 5;
+}
+
+.wq-heading-area h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #0e838f;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+/* Split text word styling - each word fades/blurs in on scroll */
+.wq-split-word {
+    display: inline-block;
+    opacity: 0.1;
+    filter: blur(4px);
+    transition: opacity 0.3s, filter 0.3s;
+    margin-right: 0.3em;
+}
+
+.wq-split-word.revealed {
+    opacity: 1;
+    filter: blur(0px);
+}
+
+.wq-subtitle {
+    font-size: 1.15rem;
+    color: #4a7c82;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0;
+}
+
+/* ========================================
+   WATER BOTTLE SVG
+   ======================================== */
+
+.wq-bottle-container {
+    position: relative;
+    width: 200px;
+    height: 350px;
+    margin: 0 auto 2rem;
+    z-index: 10;
+}
+
+.wq-bottle-svg {
+    width: 100%;
+    height: 100%;
+    transform-origin: bottom center;
+    filter: drop-shadow(0 20px 40px rgba(14, 131, 143, 0.2));
+}
+
+/* Water level inside the bottle - animated */
+.wq-water-level {
+    transition: none; /* GSAP manages this */
+}
+
+/* ========================================
+   DROPLET SYSTEM
+   ======================================== */
+
+.wq-droplets-area {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    z-index: 5;
+    padding: 2rem 0;
+}
+
+/* Individual droplet card */
+.wq-droplet {
+    position: relative;
+    width: 180px;
+    opacity: 0;
+    transform: translateY(-60px) scale(0.3);
+}
+
+/* The droplet shape container */
+.wq-droplet-shape {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 0.75rem;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: linear-gradient(180deg, 
+        rgba(14, 131, 143, 0.08) 0%, 
+        rgba(14, 131, 143, 0.15) 50%, 
+        rgba(14, 131, 143, 0.25) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(14, 131, 143, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(14, 131, 143, 0.15),
+        inset 0 -10px 20px rgba(14, 131, 143, 0.05),
+        inset 0 4px 8px rgba(255, 255, 255, 0.4);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s ease;
+}
+
+.wq-droplet-shape::before {
+    content: '';
+    position: absolute;
+    top: 12%;
+    left: 20%;
+    width: 30%;
+    height: 20%;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    filter: blur(4px);
+}
+
+.wq-droplet:hover .wq-droplet-shape {
+    transform: scale(1.08);
+    box-shadow: 
+        0 12px 40px rgba(14, 131, 143, 0.25),
+        inset 0 -10px 20px rgba(14, 131, 143, 0.08),
+        inset 0 4px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Value inside droplet */
+.wq-droplet-value {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0e838f;
+    line-height: 1;
+    text-align: center;
+}
+
+.wq-droplet-unit {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #4a9ea8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+}
+
+/* Label below the droplet */
+.wq-droplet-label {
+    text-align: center;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.wq-droplet-label h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #155e75;
+    margin: 0 0 0.2rem 0;
+}
+
+.wq-droplet-label p {
+    font-size: 0.75rem;
+    color: #5b8a8f;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ========================================
+   WATER RIPPLE EFFECTS (background decoration)
+   ======================================== */
+
+.wq-ripple {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(14, 131, 143, 0.15);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wq-ripple-1 {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    left: 5%;
+}
+
+.wq-ripple-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 15%;
+    right: 10%;
+}
+
+.wq-ripple-3 {
+    width: 400px;
+    height: 400px;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ========================================
+   FLOATING WATER PARTICLES (ambient)
+   ======================================== */
+
+.wq-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(14, 131, 143, 0.15);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ========================================
+   SCROLL INDICATOR
+   ======================================== */
+
+.wq-scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    z-index: 15;
+}
+
+.wq-scroll-hint span {
+    font-size: 0.75rem;
+    color: #4a9ea8;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+.wq-scroll-hint-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid #4a9ea8;
+    border-bottom: 2px solid #4a9ea8;
+    transform: rotate(45deg);
+    animation: wqBounceArrow 2s infinite;
+}
+
+@keyframes wqBounceArrow {
+    0%, 20%, 50%, 80%, 100% { transform: rotate(45deg) translateY(0); }
+    40% { transform: rotate(45deg) translateY(6px); }
+    60% { transform: rotate(45deg) translateY(3px); }
+}
+
+/* ========================================
+   BOTTOM SUMMARY BAR
+   ======================================== */
+
+.wq-summary-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    opacity: 0;
+}
+
+.wq-summary-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(14, 131, 143, 0.15);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #155e75;
+    box-shadow: 0 2px 8px rgba(14, 131, 143, 0.1);
+}
+
+.wq-summary-badge svg {
+    width: 16px;
+    height: 16px;
+    color: #0e838f;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .wq-bottle-container {
+        width: 140px;
+        height: 250px;
+        margin-bottom: 1.5rem;
+    }
+
+    .wq-droplets-area {
+        gap: 1rem;
+        min-height: 300px;
+    }
+
+    .wq-droplet {
+        width: 140px;
+    }
+
+    .wq-droplet-shape {
+        width: 110px;
+        height: 110px;
+    }
+
+    .wq-droplet-value {
+        font-size: 1.5rem;
+    }
+
+    .wq-heading-area h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wq-droplets-area {
+        gap: 0.75rem;
+    }
+
+    .wq-droplet {
+        width: 120px;
+    }
+
+    .wq-droplet-shape {
+        width: 90px;
+        height: 90px;
+    }
+
+    .wq-droplet-value {
+        font-size: 1.25rem;
+    }
+
+    .wq-droplet-unit {
+        font-size: 0.6rem;
+    }
+}

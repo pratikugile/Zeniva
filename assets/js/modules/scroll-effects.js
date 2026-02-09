@@ -34,6 +34,7 @@
                     toggleActions: 'play none none none'
                 },
                 y: 25,
+                opacity: 0,
                 duration: 0.9,
                 ease: 'power2.out'
             });
@@ -52,6 +53,7 @@
                     toggleActions: 'play none none none'
                 },
                 y: 40,
+                opacity: 0,
                 duration: 1,
                 ease: 'power2.out'
             });
@@ -67,6 +69,7 @@
             gsap.from(items, {
                 scrollTrigger: { trigger: list, start: 'top 82%' },
                 y: 20,
+                opacity: 0,
                 stagger: 0.1,
                 duration: 0.7,
                 ease: 'power2.out'
